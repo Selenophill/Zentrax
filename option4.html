@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZENTRAX</title>
+    <link rel="stylesheet" href="option4.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function(){
+            emailjs.init({
+                publicKey: "qGKJl7Z5srnz2d-_4",
+            });
+        })();
+    </script>
+</head>
+<body>
+    <div class="cursor"></div>
+    
+    <header class="top-bar">
+        <div class="brand">
+            <img src="logo.png" alt="Zentrax">
+        </div>
+        <button class="menu-btn">MENU</button>
+    </header>
+
+    <nav class="fullscreen-menu">
+        <button class="close-btn">×</button>
+        <ul class="menu-list">
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#philosophy">Philosophy</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#capabilities">Capabilities</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section id="hero" class="hero-section">
+        <div class="hero-text">
+            <h1 class="reveal">ZENTRAX</h1>
+            <p class="reveal">Construction & Architecture</p>
+            <div class="hero-subtitle reveal">Where Vision Meets Execution</div>
+        </div>
+        <div class="scroll-indicator">
+            <span>SCROLL</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <section id="philosophy" class="philosophy-section">
+        <div class="content-wrapper">
+            <div class="text-block">
+                <span class="label">OUR PHILOSOPHY</span>
+                <h2>We create spaces that inspire</h2>
+                <p>At Zentrax, we believe architecture is more than buildings—it's about creating experiences. Every project is a unique journey where innovation meets tradition, and where your vision becomes our blueprint for success.</p>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="stat-number">2025</div>
+                    <div class="stat-label">Founded</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Support</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Commitment</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" class="portfolio-section">
+        <h2 class="section-heading">Selected Works</h2>
+        <div class="projects-container">
+            <div class="project-item" data-color="#e74c3c">
+                <div class="project-image">
+                    <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80" alt="Vertex Tower">
+                </div>
+                <div class="project-info">
+                    <h3>Vertex Tower</h3>
+                    <p>Mixed-Use Development</p>
+                    <span class="year">2024</span>
+                </div>
+            </div>
+            <div class="project-item" data-color="#3498db">
+                <div class="project-image">
+                    <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800&q=80" alt="Coastal Residence">
+                </div>
+                <div class="project-info">
+                    <h3>Coastal Residence</h3>
+                    <p>Luxury Living</p>
+                    <span class="year">2024</span>
+                </div>
+            </div>
+            <div class="project-item" data-color="#2ecc71">
+                <div class="project-image">
+                    <img src="innovation-center.jpg" alt="Innovation Center">
+                </div>
+                <div class="project-info">
+                    <h3>Innovation Center</h3>
+                    <p>Corporate Campus</p>
+                    <span class="year">2024</span>
+                </div>
+            </div>
+            <div class="project-item" data-color="#9b59b6">
+                <div class="project-image">
+                    <img src="residential-township.jpg" alt="Residential Township">
+                </div>
+                <div class="project-info">
+                    <h3>Residential Township</h3>
+                    <p>Planned Community</p>
+                    <span class="year">In Planning</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="capabilities" class="capabilities-section">
+        <h2 class="section-heading">What We Offer</h2>
+        <div class="capabilities-grid">
+            <div class="capability">
+                <span class="cap-number">01</span>
+                <h3>Master Planning</h3>
+                <p>Comprehensive urban and site development strategies</p>
+            </div>
+            <div class="capability">
+                <span class="cap-number">02</span>
+                <h3>Design Excellence</h3>
+                <p>Award-winning architectural and interior design</p>
+            </div>
+            <div class="capability">
+                <span class="cap-number">03</span>
+                <h3>Construction Management</h3>
+                <p>Seamless execution from groundbreaking to completion</p>
+            </div>
+            <div class="capability">
+                <span class="cap-number">04</span>
+                <h3>Sustainability</h3>
+                <p>Green building practices and LEED certification</p>
+            </div>
+            <div class="capability">
+                <span class="cap-number">05</span>
+                <h3>Consultation</h3>
+                <p>Strategic advisory for development projects</p>
+            </div>
+            <div class="capability">
+                <span class="cap-number">06</span>
+                <h3>Post-Completion Care</h3>
+                <p>Ongoing maintenance and support services</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+        <div class="contact-content">
+            <h2>Let's Create Something Extraordinary</h2>
+            <form class="modern-form" id="contactForm">
+                <div class="input-group">
+                    <input type="text" name="name" id="name" required>
+                    <label>Your Name</label>
+                </div>
+                <div class="input-group">
+                    <input type="email" name="email" id="email" required>
+                    <label>Email Address</label>
+                </div>
+                <div class="input-group">
+                    <textarea name="message" id="message" required rows="1"></textarea>
+                    <label>Project Brief</label>
+                </div>
+                <button type="submit" class="submit-btn">
+                    <span>Submit</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-logo">ZENTRAX</div>
+            <div class="footer-links">
+                <a href="#">LinkedIn</a>
+                <a href="#">Instagram</a>
+                <a href="#">Twitter</a>
+            </div>
+            <p>&copy; 2025 Zentrax Construction. Crafted with precision.</p>
+        </div>
+    </footer>
+
+    <script src="option4.js"></script>
+</body>
+</html>
