@@ -160,24 +160,64 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Project data repository
+    const projectData = {
+        'Vertex Tower': {
+            type: 'Mixed-Use Development',
+            description: 'A landmark of vertical engineering, redefining the city skyline with a fusion of premium residential and commercial spaces.',
+            duration: '30 months',
+            area: '180,000 sq ft',
+            status: 'Completed'
+        },
+        'Coastal Residence': {
+            type: 'Luxury Living',
+            description: 'A masterpiece of architectural harmony, designed to maximize natural light and panoramic ocean views through sustainable, open-concept design.',
+            duration: '14 months',
+            area: '12,500 sq ft',
+            status: 'Completed'
+        },
+        'Innovation Center': {
+            type: 'Corporate Campus',
+            description: 'A state-of-the-art workspace fostering creativity through smart-building technology, modular layouts, and collaborative infrastructure.',
+            duration: '20 months',
+            area: '65,000 sq ft',
+            status: 'Completed'
+        },
+        'Residential Township': {
+            type: 'Planned Community',
+            description: 'A master-planned "city-within-a-city" featuring holistic housing, lush green zones, and integrated retail centers for sustainable urban living.',
+            duration: '48 months',
+            area: '1.2M sq ft',
+            status: 'Completed'
+        }
+    };
+
     function showProjectModal(name, desc) {
+        const project = projectData[name] || {
+            type: desc,
+            description: 'Project details coming soon.',
+            duration: 'TBD',
+            area: 'TBD',
+            status: 'In Progress'
+        };
+        
         const modal = document.createElement('div');
         modal.className = 'project-modal';
         modal.innerHTML = `
             <div class="modal-content">
                 <button class="modal-close">&times;</button>
                 <h2>${name}</h2>
-                <p>${desc}</p>
-                <p class="modal-description">This is a featured project showcasing modern architecture and innovative design solutions. Our team delivered exceptional results with attention to detail and quality craftsmanship.</p>
+                <p>${project.type}</p>
+                <p class="modal-description">${project.description}</p>
                 <div class="modal-stats">
                     <div class="modal-stat">
-                        <strong>Duration:</strong> 18 months
+                        <strong>Duration:</strong> ${project.duration}
                     </div>
                     <div class="modal-stat">
-                        <strong>Area:</strong> 50,000 sq ft
+                        <strong>Area:</strong> ${project.area}
                     </div>
                     <div class="modal-stat">
-                        <strong>Status:</strong> Completed
+                        <strong>Status:</strong> ${project.status}
                     </div>
                 </div>
             </div>
