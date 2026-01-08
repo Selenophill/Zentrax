@@ -375,9 +375,52 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Service Category Accordion
+    const categoryHeaders = document.querySelectorAll('.category-header');
+    
+    categoryHeaders.forEach((header, index) => {
+        // Open first category by default
+        if (index === 0) {
+            header.parentElement.classList.add('active');
+        }
+        
+        header.addEventListener('click', () => {
+            const category = header.parentElement;
+            const isActive = category.classList.contains('active');
+            
+            // Close all categories
+            document.querySelectorAll('.service-category').forEach(cat => {
+                cat.classList.remove('active');
+            });
+            
+            // Open clicked category if it wasn't active
+            if (!isActive) {
+                category.classList.add('active');
+            }
+        });
+    });
 
+    // Animate service items on scroll
+    const serviceObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateX(0)';
+                }, index * 100);
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    });
 
-
+    document.querySelectorAll('.service-item').forEach(item => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateX(-20px)';
+        item.style.transition = 'opacity 0.5s, transform 0.5s';
+        serviceObserver.observe(item);
+    });
 
     // Project hover effects
     const projects = document.querySelectorAll('.project-item');
