@@ -451,6 +451,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 from_name: document.getElementById('name').value,
                 from_email: document.getElementById('email').value,
                 phone_number: document.getElementById('phone').value,
+                service_category: document.getElementById('service').value,
                 reply_to: document.getElementById('email').value,
                 message: document.getElementById('message').value,
                 to_email: 'zentrax1234@gmail.com'
