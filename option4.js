@@ -533,4 +533,250 @@ document.addEventListener('DOMContentLoaded', () => {
         el.style.transition = 'opacity 0.6s, transform 0.6s';
         observer.observe(el);
     });
+
+    // Popup Form Functionality
+    const popupOverlay = document.getElementById('popupOverlay');
+    const popupClose = document.getElementById('popupClose');
+    const popupForm = document.getElementById('popupForm');
+    let popupClosed = false;
+    let popupTimeout = null;
+    let isNearFooter = false;
+
+    // Function to check if user is near footer
+    function checkFooterProximity() {
+        const footer = document.querySelector('.site-footer');
+        if (!footer) return false;
+
+        const footerTop = footer.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+        
+        // User is near footer if footer is visible or within 200px of viewport
+        return footerTop < windowHeight + 200;
+    }
+
+    // Function to show popup
+    function showPopup() {
+        if (!popupOverlay.classList.contains('active')) {
+            popupOverlay.classList.add('active');
+            popupClosed = false;
+        }
+    }
+
+    // Function to handle popup reopening after delay
+    function schedulePopupReopening() {
+        if (popupTimeout) {
+            clearTimeout(popupTimeout);
+        }
+        
+        popupTimeout = setTimeout(() => {
+            if (isNearFooter && popupClosed) {
+                showPopup();
+            }
+        }, 15000); // 15 seconds
+    }
+
+    // Scroll event to detect footer proximity
+    window.addEventListener('scroll', () => {
+        const nearFooter = checkFooterProximity();
+        
+        if (nearFooter && !isNearFooter) {
+            // Just entered footer area
+            isNearFooter = true;
+            if (!popupClosed) {
+                showPopup();
+            } else {
+                schedulePopupReopening();
+            }
+        } else if (!nearFooter && isNearFooter) {
+            // Left footer area
+            isNearFooter = false;
+            if (popupTimeout) {
+                clearTimeout(popupTimeout);
+            }
+        } else if (nearFooter && isNearFooter && popupClosed) {
+            // Still in footer area and popup was closed
+            if (!popupTimeout) {
+                schedulePopupReopening();
+            }
+        }
+    });
+
+    // Close popup when clicking X button
+    popupClose.addEventListener('click', () => {
+        popupOverlay.classList.remove('active');
+        popupClosed = true;
+        if (isNearFooter) {
+            schedulePopupReopening();
+        }
+    });
+
+    // Close popup when clicking outside
+    popupOverlay.addEventListener('click', (e) => {
+        if (e.target === popupOverlay) {
+            popupOverlay.classList.remove('active');
+            popupClosed = true;
+            if (isNearFooter) {
+                schedulePopupReopening();
+            }
+        }
+    });
+
+    // Handle popup form submission with EmailJS
+    popupForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const submitBtn = popupForm.querySelector('.popup-submit-btn');
+        const originalText = submitBtn.querySelector('span').textContent;
+        submitBtn.querySelector('span').textContent = 'Sending...';
+        submitBtn.disabled = true;
+        
+        const templateParams = {
+            from_name: document.getElementById('popupName').value,
+            from_email: document.getElementById('popupEmail').value,
+            phone_number: document.getElementById('popupPhone').value,
+            service_category: 'Popup Inquiry - Free Quote/Site Visit',
+            reply_to: document.getElementById('popupEmail').value,
+            message: document.getElementById('popupMessage').value,
+            to_email: 'zentrax1234@gmail.com'
+        };
+        
+        emailjs.send('service_u782zz3', 'template_7pl7sgs', templateParams)
+            .then(function(response) {
+                alert('Thank you for your interest! Our team will contact you within 24 hours.');
+                popupForm.reset();
+                popupOverlay.classList.remove('active');
+                submitBtn.querySelector('span').textContent = originalText;
+                submitBtn.disabled = false;
+            }, function(error) {
+                alert('Failed to send message. Please try again later.');
+                submitBtn.querySelector('span').textContent = originalText;
+                submitBtn.disabled = false;
+                console.error('EmailJS Error:', error);
+            });
+    });
+
+    // AI Chatbot Functionality
+    const chatbotToggle = document.getElementById('chatbotToggle');
+    const chatbotContainer = document.getElementById('chatbotContainer');
+    const chatbotMinimize = document.getElementById('chatbotMinimize');
+    const chatbotMessages = document.getElementById('chatbotMessages');
+    const chatbotInput = document.getElementById('chatbotInput');
+    const chatbotSend = document.getElementById('chatbotSend');
+    const chatbotBadge = document.querySelector('.chatbot-badge');
+
+    // Chatbot knowledge base
+    const chatbotResponses = {
+        services: "We offer comprehensive construction services:\n\n🏠 Find a Space - Property rentals & leasing\n✏️ Design a Space - Architecture & interior design\n🏗️ Build a Space - Construction & engineering\n⚙️ Specialize a Space - Smart home solutions\n🔧 Maintain a Space - Repairs & facility management\n\nWhich service interests you?",
+        quote: "To get a free quote or site visit:\n\n📧 Email: zentrax1234@gmail.com\n📞 Phone: +91 72046 56119\n📱 Alternative: +91 70194 36720\n\nOr fill out our contact form and we'll reach out within 24 hours!",
+        contact: "Contact us anytime:\n\n📧 zentrax1234@gmail.com\n📞 +91 72046 56119\n📱 +91 70194 36720\n⏰ Mon-Sat: 9 AM - 7 PM\n📍 View our location on the contact section\n\nWe're here to help build your dream!",
+        hello: "Hello! Welcome to ZENTRAX - where vision meets execution. How can I assist you today?",
+        default: "I'm here to help with information about our construction and architecture services. You can ask me about:\n\n• Our services\n• Getting a quote\n• Contact information\n• Project timelines\n• Our expertise\n\nWhat would you like to know?"
+    };
+
+    // Toggle chatbot
+    chatbotToggle.addEventListener('click', () => {
+        chatbotContainer.classList.add('active');
+        chatbotToggle.classList.add('hidden');
+        chatbotBadge.style.display = 'none';
+    });
+
+    chatbotMinimize.addEventListener('click', () => {
+        chatbotContainer.classList.remove('active');
+        chatbotToggle.classList.remove('hidden');
+    });
+
+    // Quick reply buttons
+    document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('quick-reply')) {
+            const question = e.target.dataset.question;
+            const questionText = e.target.textContent;
+            addMessage(questionText, 'user');
+            e.target.parentElement.remove();
+            setTimeout(() => {
+                addBotResponse(question);
+            }, 500);
+        }
+    });
+
+    // Send message function
+    function sendMessage() {
+        const message = chatbotInput.value.trim();
+        if (message) {
+            addMessage(message, 'user');
+            chatbotInput.value = '';
+            
+            setTimeout(() => {
+                const response = getBotResponse(message);
+                addBotResponse(response);
+            }, 500);
+        }
+    }
+
+    // Add message to chat
+    function addMessage(text, sender) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `chatbot-message ${sender}-message`;
+        messageDiv.innerHTML = `
+            <div class="message-content">
+                <p>${text}</p>
+            </div>
+        `;
+        chatbotMessages.appendChild(messageDiv);
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+    }
+
+    // Add bot response
+    function addBotResponse(responseKey) {
+        // Show typing indicator
+        const typingDiv = document.createElement('div');
+        typingDiv.className = 'chatbot-message bot-message';
+        typingDiv.innerHTML = `
+            <div class="typing-indicator">
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+            </div>
+        `;
+        chatbotMessages.appendChild(typingDiv);
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+
+        setTimeout(() => {
+            typingDiv.remove();
+            const response = typeof responseKey === 'string' && chatbotResponses[responseKey] 
+                ? chatbotResponses[responseKey] 
+                : responseKey;
+            addMessage(response, 'bot');
+        }, 1000);
+    }
+
+    // Get bot response based on user input
+    function getBotResponse(message) {
+        const lowerMessage = message.toLowerCase();
+        
+        if (lowerMessage.includes('hello') || lowerMessage.includes('hi') || lowerMessage.includes('hey')) {
+            return chatbotResponses.hello;
+        } else if (lowerMessage.includes('service') || lowerMessage.includes('what do you') || lowerMessage.includes('offer')) {
+            return chatbotResponses.services;
+        } else if (lowerMessage.includes('quote') || lowerMessage.includes('price') || lowerMessage.includes('cost')) {
+            return chatbotResponses.quote;
+        } else if (lowerMessage.includes('contact') || lowerMessage.includes('phone') || lowerMessage.includes('email') || lowerMessage.includes('reach')) {
+            return chatbotResponses.contact;
+        } else if (lowerMessage.includes('thank')) {
+            return "You're welcome! Feel free to reach out anytime. We're here to help build your dream space! 🏗️";
+        } else if (lowerMessage.includes('hours') || lowerMessage.includes('time') || lowerMessage.includes('open')) {
+            return "We're available Monday to Saturday, 9:00 AM to 7:00 PM. Contact us anytime and we'll get back to you promptly!";
+        } else {
+            return chatbotResponses.default;
+        }
+    }
+
+    // Send button click
+    chatbotSend.addEventListener('click', sendMessage);
+
+    // Enter key to send
+    chatbotInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            sendMessage();
+        }
+    });
 });

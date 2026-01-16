@@ -94,6 +94,66 @@
         </div>
     </section>
 
+    <section class="defines-us-section">
+        <div class="defines-us-container">
+            <span class="label">WHAT DEFINES US?</span>
+            <h2 class="defines-us-title">Building Homes For The Way You Live.</h2>
+            
+            <div class="defines-us-content">
+                <div class="defines-us-features">
+                    <!-- Left Features -->
+                    <div class="feature-item left-feature" style="top: 5%;">
+                        <div class="feature-content">
+                            <h4>Design as per customer requirement</h4>
+                        </div>
+                    </div>
+                    <div class="feature-item left-feature" style="top: 30%;">
+                        <div class="feature-content">
+                            <h4>Material demo in office with PPT presentations</h4>
+                        </div>
+                    </div>
+                    <div class="feature-item left-feature" style="top: 55%;">
+                        <div class="feature-content">
+                            <h4>10ft ceiling height at each floor</h4>
+                        </div>
+                    </div>
+                    <div class="feature-item left-feature" style="top: 80%;">
+                        <div class="feature-content">
+                            <h4>Loan facility available</h4>
+                        </div>
+                    </div>
+                    
+                    <!-- Center Image -->
+                    <div class="defines-us-image">
+                        <img src="zentrax-showcase.jpg" alt="ZENTRAX Construction Quality">
+                    </div>
+                    
+                    <!-- Right Features -->
+                    <div class="feature-item right-feature" style="top: 5%;">
+                        <div class="feature-content">
+                            <h4>Safety comes first</h4>
+                        </div>
+                    </div>
+                    <div class="feature-item right-feature" style="top: 30%;">
+                        <div class="feature-content">
+                            <h4>We push to keep projects natural</h4>
+                        </div>
+                    </div>
+                    <div class="feature-item right-feature" style="top: 55%;">
+                        <div class="feature-content">
+                            <h4>Daily 4-5 site visits by engineer</h4>
+                        </div>
+                    </div>
+                    <div class="feature-item right-feature" style="top: 80%;">
+                        <div class="feature-content">
+                            <h4>No compromise on material quality</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="capabilities" class="capabilities-section">
         <h2 class="section-heading">Your One-Stop Construction & Housing Solution</h2>
         <p class="section-subtitle">From Dream to Reality - We Guide You Through Every Phase</p>
@@ -472,6 +532,71 @@
             </div>
         </div>
     </section>
+
+    <!-- AI Chatbot -->
+    <div class="chatbot-container" id="chatbotContainer">
+        <div class="chatbot-header">
+            <div class="chatbot-header-info">
+                <div class="chatbot-avatar">Z</div>
+                <div>
+                    <h4>ZenBot</h4>
+                    <span class="chatbot-status">Online</span>
+                </div>
+            </div>
+            <button class="chatbot-minimize" id="chatbotMinimize">−</button>
+        </div>
+        <div class="chatbot-messages" id="chatbotMessages">
+            <div class="chatbot-message bot-message">
+                <div class="message-content">
+                    <p>Hello! I'm ZenBot, your construction & design companion. How can I help you today?</p>
+                    <div class="quick-replies">
+                        <button class="quick-reply" data-question="services">Our Services</button>
+                        <button class="quick-reply" data-question="quote">Get a Quote</button>
+                        <button class="quick-reply" data-question="contact">Contact Info</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="chatbot-input-area">
+            <input type="text" id="chatbotInput" placeholder="Type your message..." />
+            <button id="chatbotSend"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+    
+    <button class="chatbot-toggle" id="chatbotToggle">
+        <i class="fas fa-comments"></i>
+        <span class="chatbot-badge">1</span>
+    </button>
+
+    <!-- Popup Contact Form -->
+    <div class="popup-overlay" id="popupOverlay">
+        <div class="popup-container">
+            <button class="popup-close" id="popupClose">×</button>
+            <div class="popup-content">
+                <h2 class="popup-title">Get A Free Site Visit Or Quote!</h2>
+                <h3 class="popup-subtitle">Looking To <strong>Build Your Dream Home</strong> Or <strong>Renovate Your Space?</strong></h3>
+                <p class="popup-description">Fill in your details and our team will contact you within 24 hours.</p>
+                
+                <form class="popup-form" id="popupForm">
+                    <div class="popup-input-group">
+                        <input type="text" name="name" id="popupName" placeholder="Full Name" required>
+                    </div>
+                    <div class="popup-input-group">
+                        <input type="email" name="email" id="popupEmail" placeholder="Email Address" required>
+                    </div>
+                    <div class="popup-input-group">
+                        <input type="tel" name="phone" id="popupPhone" placeholder="Phone Number" required>
+                    </div>
+                    <div class="popup-input-group">
+                        <textarea name="message" id="popupMessage" placeholder="Details" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="popup-submit-btn">
+                        <span>Contact Us Now</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <footer class="site-footer">
         <div class="footer-content">
